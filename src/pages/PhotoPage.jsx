@@ -1,7 +1,7 @@
 import React from "react";
 
 const PhotoPage = () => {
-  return <div>포토페이지</div>;
+  return <div>PhotoPage</div>;
 };
 
 export default PhotoPage;

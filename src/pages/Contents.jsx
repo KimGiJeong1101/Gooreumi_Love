@@ -1,13 +1,15 @@
 import React from "react";
 import PhotoPage from "./PhotoPage";
 import VideoPage from "./VideoPage";
+import HomePage from "./HomePage";
 
-const Contents = () => {
+const Contents = ({ page }) => {
   return (
-    <div className="bg-orange-300">
+    <div className="bg-orange-300 w-full p-6 min-h-screen">
       콘텐츠
-      <PhotoPage></PhotoPage>
-      <VideoPage></VideoPage>
+      {page === "home" && <HomePage />}
+      {page === "photo" && <PhotoPage />}
+      {page === "video" && <VideoPage />}
     </div>
   );
 };
