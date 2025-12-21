@@ -13,7 +13,7 @@ const HomePage = () => {
         } while (next === prev);
         return next;
       });
-    }, 5000); // 5초마다
+    }, 6500); // 5초마다
 
     return () => clearInterval(interval);
   }, []);
