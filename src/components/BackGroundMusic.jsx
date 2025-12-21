@@ -110,11 +110,30 @@ const BackGroundMusic = () => {
               gap: "12px",
             }}
           >
-            {!isPlaying && <button onClick={handlePlay}>▶</button>}
+            {!isPlaying && (
+              <button
+                onClick={handlePlay}
+                className="w-5 h-6 flex items-center justify-center text-white text-base"
+              >
+                ▶
+              </button>
+            )}
 
-            {isPlaying && <button onClick={handlePause}>⏸</button>}
+            {isPlaying && (
+              <button
+                onClick={handlePause}
+                className="w-5 h-6 flex items-center justify-center text-white text-base"
+              >
+                ❚❚
+              </button>
+            )}
 
-            <button onClick={handleStop}>⏹</button>
+            <button
+              onClick={handleStop}
+              className="w-5 h-6 flex items-center justify-center text-white text-base"
+            >
+              ■
+            </button>
           </div>
 
           {/* 볼륨 */}
@@ -125,7 +144,7 @@ const BackGroundMusic = () => {
             step="0.01"
             value={volume}
             onChange={handleVolumeChange}
-            style={{ width: "80px" }}
+            className="w-12 sm:w-16 h-0.5 bg-white/40 rounded-full appearance-none cursor-pointer"
           />
         </div>
       )}
