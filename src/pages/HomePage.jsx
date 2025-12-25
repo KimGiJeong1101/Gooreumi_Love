@@ -13,19 +13,26 @@ const HomePage = () => {
         } while (next === prev);
         return next;
       });
-    }, 6500); // 5초마다
+    }, 6500);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full p-8 min-h-screen">
-      <div className="w-full min-h-screen relative overflow-hidden">
+    <div className="w-full h-screen overflow-hidden">
+      <div className="relative w-full h-screen">
+        {/* 배경 blur */}
         <img
-          key={currentIndex} // 이미지 변경 시 fade 적용
           src={bgImages[currentIndex]}
+          className="absolute inset-0 w-full h-full object-cover blur-xl scale-110"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover animate-fade"
+        />
+
+        {/* 메인 이미지 */}
+        <img
+          src={bgImages[currentIndex]}
+          className="relative w-full h-full object-contain animate-fade"
+          alt=""
         />
       </div>
     </div>
