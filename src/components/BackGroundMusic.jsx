@@ -89,7 +89,7 @@ const BackGroundMusic = () => {
       {started && (
         <div
           style={{
-            position: "fixed",
+            position: "absolute",
             top: "16px",
             right: "16px",
             display: "flex",
