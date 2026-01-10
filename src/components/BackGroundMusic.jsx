@@ -60,27 +60,45 @@ const BackGroundMusic = () => {
           style={{
             position: "fixed",
             inset: 0,
-            background: "#000",
-            color: "#fff",
+
+            background:
+              "linear-gradient(180deg, #cfe9ff 0%, #eaf6ff 50%, #ffffff 100%)",
+            color: "#3a4a5a",
+
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            zIndex: 9999,
 
+            zIndex: 9999,
             opacity: started ? 0 : 1,
             transition: "opacity 2.3s ease",
             pointerEvents: started ? "none" : "auto",
+
+            boxShadow: "inset 0 -80px 120px rgba(0,0,0,0.05)",
           }}
         >
           <button
             onClick={handleStart}
             style={{
               fontSize: "18px",
-              padding: "12px 24px",
+              padding: "14px 36px",
+
+              borderRadius: "999px",
+              border: "none",
+
+              background: "linear-gradient(135deg, #eaf6ff, #ffffff)",
+              color: "#3a4a5a",
+
+              fontWeight: "600",
+              letterSpacing: "0.5px",
+
               cursor: "pointer",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
             }}
           >
-            ▶ 사이트 시작
+            ☁️ 구름이 만나러 가기
           </button>
         </div>
       )}
