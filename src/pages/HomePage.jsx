@@ -21,7 +21,7 @@ const HomePage = () => {
     setOrder(shuffleArray(indexes));
   }, []);
 
-  // 6.5초마다 이미지 변경
+  // 5초마다 이미지 변경
   useEffect(() => {
     if (order.length === 0) return;
 
@@ -35,7 +35,7 @@ const HomePage = () => {
         }
         return prev + 1;
       });
-    }, 6500);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [order]);
