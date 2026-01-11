@@ -1,27 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PhotoWebPage = () => {
+  // 🔧 이미지 자동 수집
+  const images = import.meta.glob(
+    "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
+  );
+
+  const imageEntries = Object.entries(images);
+  const TOTAL_PHOTOS = imageEntries.length;
+  const PHOTOS_PER_PAGE = 9;
+  const totalPages = Math.ceil(TOTAL_PHOTOS / PHOTOS_PER_PAGE);
+
+  // 상태
+  const [currentPage, setCurrentPage] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // 페이지별 이미지
+  const startIdx = currentPage * PHOTOS_PER_PAGE;
+  const endIdx = startIdx + PHOTOS_PER_PAGE;
+  const pageImages = imageEntries.slice(startIdx, endIdx);
+
   return (
     <div className="w-full h-screen bg-gray-100 p-6">
       <div className="flex gap-6 h-full">
-        {/* 왼쪽: 큰 사진 영역 */}
+        {/* 왼쪽: 선택된 사진 */}
         <div className="flex-1 bg-black rounded-lg flex items-center justify-center">
-          <span className="text-white text-xl">📸 선택된 사진 영역</span>
+          {selectedImage ? (
+            <img
+              src={selectedImage}
+              alt=""
+              className="max-w-full max-h-full object-contain"
+            />
+          ) : (
+            <span className="text-white text-xl">📸 사진을 선택하세요</span>
+          )}
         </div>
 
-        {/* 오른쪽: 썸네일 목록 */}
+        {/* 오른쪽: 썸네일 */}
         <div className="w-[360px] bg-white rounded-lg p-4 flex flex-col justify-center">
-          {/* 화살표 */}
+          {/* 페이징 */}
           <div className="flex justify-between items-center mb-4">
-            <button className="px-3 py-1 bg-gray-200 rounded">◀</button>
-            <span className="text-sm text-gray-500">사진 목록</span>
-            <button className="px-3 py-1 bg-gray-200 rounded">▶</button>
+            <button
+              className="px-3 py-1 bg-gray-200 rounded"
+              onClick={() =>
+                setCurrentPage((p) => (p - 1 + totalPages) % totalPages)
+              }
+            >
+              ◀
+            </button>
+
+            <span className="text-sm text-gray-500">
+              {currentPage + 1} / {totalPages}
+            </span>
+
+            <button
+              className="px-3 py-1 bg-gray-200 rounded"
+              onClick={() => setCurrentPage((p) => (p + 1) % totalPages)}
+            >
+              ▶
+            </button>
           </div>
 
-          {/* 썸네일 */}
+          {/* 썸네일 그리드 */}
           <div className="grid grid-cols-3 gap-3">
-            {Array.from({ length: 9 }).map((_, idx) => (
-              <div key={idx} className="aspect-square bg-gray-300 rounded" />
+            {pageImages.map(([path], idx) => (
+              <img
+                key={idx}
+                src={path}
+                loading="lazy"
+                onClick={() => setSelectedImage(path)}
+                className={`aspect-square object-cover rounded cursor-pointer
+                  ${selectedImage === path ? "ring-2 ring-blue-500" : ""}`}
+                alt=""
+              />
             ))}
           </div>
         </div>

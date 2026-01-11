@@ -8,7 +8,7 @@ const App = () => {
   const [page, setPage] = useState("home"); // home | photo | video
 
   return (
-    <div className="w-full min-h-screen bg-pink-600 border-4 border-blue-600 relative">
+    <div className="w-full min-h-screen border-4 relative">
       <BackGroundMusic></BackGroundMusic>
       <div className="mx-auto px-6 pb-6">
         <Header setPage={setPage} />

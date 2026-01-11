@@ -5,7 +5,7 @@ import HomePage from "./HomePage";
 
 const Contents = ({ page }) => {
   return (
-    <div className="bg-orange-300 w-full p-6 min-h-screen">
+    <div className="w-full p-6 min-h-screen">
       {page === "home" && <HomePage />}
       {page === "photo" && <PhotoPage />}
       {page === "video" && <VideoPage />}

@@ -7,7 +7,7 @@ const PhotoPage = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <div className="bg-green-700 w-full min-h-screen">
+    <div className="w-full min-h-screen">
       {isMobile ? <PhotoMobilePage /> : <PhotoWebPage />}
     </div>
   );

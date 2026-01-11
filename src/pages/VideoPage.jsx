@@ -7,7 +7,7 @@ const VideoPage = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <div className="bg-yellow-700 w-full min-h-screen">
+    <div className="w-full min-h-screen">
       {isMobile ? <VideoMobilePage /> : <VideoWebPage />}
     </div>
   );
