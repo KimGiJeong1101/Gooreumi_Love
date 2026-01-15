@@ -1,20 +1,11 @@
 import React, { useState } from "react";
+import usePhotoPagination from "../../components/usePhotoPagination";
 
 const PhotoMobilePage = () => {
-  // 🔧 이미지 자동 수집 (Vite)
-  const images = import.meta.glob(
-    "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
-  );
-
-  // 이미지 배열로 변환
-  const imageEntries = Object.entries(images);
-  const TOTAL_PHOTOS = imageEntries.length;
-
   const PHOTOS_PER_PAGE = 9;
-  const PAGES_PER_GROUP = 10;
+  const { totalPages, imageEntries } = usePhotoPagination(PHOTOS_PER_PAGE);
 
-  // 계산
-  const totalPages = Math.ceil(TOTAL_PHOTOS / PHOTOS_PER_PAGE);
+  const PAGES_PER_GROUP = 10;
   const totalGroups = Math.ceil(totalPages / PAGES_PER_GROUP);
 
   // 상태

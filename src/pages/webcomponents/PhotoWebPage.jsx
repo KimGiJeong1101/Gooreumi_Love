@@ -1,24 +1,15 @@
 import React, { useState } from "react";
+import usePhotoPagination from "../../components/usePhotoPagination";
 
 const PhotoWebPage = () => {
-  // 🔧 이미지 자동 수집
-  const images = import.meta.glob(
-    "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
-  );
-
-  const imageEntries = Object.entries(images);
-  const TOTAL_PHOTOS = imageEntries.length;
-  const PHOTOS_PER_PAGE = 9;
-  const totalPages = Math.ceil(TOTAL_PHOTOS / PHOTOS_PER_PAGE);
-
   // 상태
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // 페이지별 이미지
-  const startIdx = currentPage * PHOTOS_PER_PAGE;
-  const endIdx = startIdx + PHOTOS_PER_PAGE;
-  const pageImages = imageEntries.slice(startIdx, endIdx);
+  const PHOTOS_PER_PAGE = 9;
+  const { totalPages, getPageImages } = usePhotoPagination(PHOTOS_PER_PAGE);
+
+  const pageImages = getPageImages(currentPage);
 
   return (
     <div className="w-full h-screen bg-gray-100 p-6">
