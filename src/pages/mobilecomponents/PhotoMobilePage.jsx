@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import usePhotoPagination from "../../components/usePhotoPagination";
+import usePhotoPagination from "../../hooks/usePhotoPagination";
 
 const PhotoMobilePage = () => {
   const PHOTOS_PER_PAGE = 9;

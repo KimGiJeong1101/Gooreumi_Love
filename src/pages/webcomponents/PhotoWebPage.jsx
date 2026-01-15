@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import usePhotoPagination from "../../components/usePhotoPagination";
+import usePhotoPagination from "../../hooks/usePhotoPagination";
 
 const PhotoWebPage = () => {
   // 상태
