@@ -12,6 +12,9 @@ const PhotoMobilePage = () => {
   const [openGroup, setOpenGroup] = useState(null);
   const [openPage, setOpenPage] = useState(null);
 
+  // ⭐ 이미지 모달 상태
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <div className="w-full min-h-screen bg-gray-100 p-4">
       <h1 className="text-lg font-semibold mb-4">사진</h1>
@@ -39,7 +42,7 @@ const PhotoMobilePage = () => {
                 <span className="font-medium">
                   {groupStart} ~ {groupEnd} 페이지
                 </span>
-                <span className="text-xl font-bold select-none">
+                <span className="text-xl font-bold">
                   {isGroupOpen ? "−" : "+"}
                 </span>
               </button>
@@ -59,10 +62,8 @@ const PhotoMobilePage = () => {
                     const pageNumber = groupStart + pageIdx;
                     const isPageOpen = openPage === pageNumber;
 
-                    // ⭐ 페이지별 이미지 slice
                     const startIdx = (pageNumber - 1) * PHOTOS_PER_PAGE;
                     const endIdx = startIdx + PHOTOS_PER_PAGE;
-
                     const pageImages = imageEntries.slice(startIdx, endIdx);
 
                     return (
@@ -87,7 +88,7 @@ const PhotoMobilePage = () => {
                           </span>
                         </button>
 
-                        {/* 2단 콘텐츠 (사진 9개) */}
+                        {/* 2단 콘텐츠 */}
                         <div
                           className="transition-all duration-700 ease-in-out px-3"
                           style={{
@@ -102,7 +103,8 @@ const PhotoMobilePage = () => {
                                   key={idx}
                                   src={path}
                                   alt=""
-                                  className="aspect-square object-cover rounded"
+                                  onClick={() => setSelectedImage(path)}
+                                  className="aspect-square object-cover rounded cursor-pointer"
                                 />
                               ))}
                             </div>
@@ -117,6 +119,20 @@ const PhotoMobilePage = () => {
           );
         })}
       </div>
+
+      {/* ⭐ 전체화면 이미지 모달 */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img
+            src={selectedImage}
+            alt=""
+            className="w-full h-full object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 };

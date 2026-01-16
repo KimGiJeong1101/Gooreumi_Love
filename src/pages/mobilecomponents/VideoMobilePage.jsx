@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
+import useVideoPagination from "../../hooks/useVideoPagination";
 
 const VideoMobilePage = () => {
-  // 임시 전체 영상 개수
-  const TOTAL_VIDEOS = 12;
+  const { videoEntries, totalVideos } = useVideoPagination();
 
-  // 처음 5개 로드
   const [loadedCount, setLoadedCount] = useState(5);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
 
   const loadMoreRef = useRef(null);
 
@@ -19,9 +19,8 @@ const VideoMobilePage = () => {
         if (entry.isIntersecting && !isLoading) {
           setIsLoading(true);
 
-          // ⭐ 로딩 텀
           setTimeout(() => {
-            const remaining = TOTAL_VIDEOS - loadedCount;
+            const remaining = totalVideos - loadedCount;
 
             if (remaining <= 0) {
               setHasMore(false);
@@ -32,7 +31,7 @@ const VideoMobilePage = () => {
             const next = remaining >= 3 ? 3 : remaining;
             setLoadedCount((prev) => prev + next);
             setIsLoading(false);
-          }, 1500); // 👈 로딩 시간 (ms)
+          }, 1000);
         }
       },
       { threshold: 1 }
@@ -43,29 +42,30 @@ const VideoMobilePage = () => {
     }
 
     return () => observer.disconnect();
-  }, [loadedCount, hasMore, isLoading]);
+  }, [loadedCount, hasMore, isLoading, totalVideos]);
 
   return (
     <div className="w-full min-h-screen bg-gray-100">
-      {/* 📺 썸네일 리스트 */}
       <div className="flex flex-col">
-        {Array.from({ length: loadedCount }).map((_, idx) => (
-          <div key={idx} className="w-full">
-            {/* 썸네일 */}
-            <div className="w-full aspect-video bg-gray-300 flex items-center justify-center">
-              썸네일 {idx + 1}
-            </div>
+        {videoEntries.slice(0, loadedCount).map((video, idx) => (
+          <div key={idx}>
+            <button onClick={() => setActiveVideo(video)}>
+              <video
+                src={video}
+                preload="metadata"
+                muted
+                className="w-full aspect-video bg-black"
+              />
+            </button>
 
-            {/* 설명 */}
             <div className="px-3 py-2">
               <p className="text-sm font-medium">영상 제목 {idx + 1}</p>
-              <p className="text-xs text-gray-500">영상 설명 텍스트</p>
+              <p className="text-xs text-gray-500">영상 설명</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* 👀 스크롤 감지 영역 */}
       <div ref={loadMoreRef} className="h-16 flex items-center justify-center">
         {hasMore ? (
           isLoading ? (
@@ -79,6 +79,24 @@ const VideoMobilePage = () => {
           </p>
         )}
       </div>
+
+      {activeVideo && (
+        <div className="fixed inset-0 bg-black z-50">
+          <video
+            src={activeVideo}
+            controls
+            autoPlay
+            playsInline
+            className="w-full h-full object-contain"
+          />
+          <button
+            onClick={() => setActiveVideo(null)}
+            className="absolute top-4 left-4 text-white text-3xl"
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,30 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import useVideoPagination from "../../hooks/useVideoPagination";
 
 const VideoWebPage = () => {
+  const { videoEntries } = useVideoPagination();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (videoEntries.length === 0) return null;
+
+  const total = videoEntries.length;
+
+  const leftIndex = (currentIndex - 1 + total) % total;
+  const rightIndex = (currentIndex + 1) % total;
+
+  const left = videoEntries[leftIndex];
+  const center = videoEntries[currentIndex];
+  const right = videoEntries[rightIndex];
+
   return (
     <div className="w-full min-h-screen bg-gray-900 flex items-center justify-center">
-      <div className="relative w-full max-w-7xl flex items-center justify-center gap-14 px-6">
-        {/* ◀ 화살표 */}
-        <button className="text-white text-5xl hover:scale-110 transition">
+      <div className="flex items-center gap-10">
+        <button
+          onClick={() => setCurrentIndex(leftIndex)}
+          className="text-white text-4xl"
+        >
           ◀
         </button>
 
-        {/* 🎬 캐러셀 영역 */}
-        <div className="flex items-center gap-12">
-          {/* 왼쪽 영상 */}
-          <div className="w-72 h-40 bg-gray-700 rounded-2xl opacity-50 scale-90" />
+        <button onClick={() => setCurrentIndex(leftIndex)}>
+          <video
+            src={left}
+            preload="metadata"
+            muted
+            className="w-64 aspect-video opacity-50 scale-90 rounded-xl"
+          />
+        </button>
 
-          {/* 가운데 (메인 영상) */}
-          <div className="w-[560px] h-[320px] bg-black rounded-3xl shadow-2xl flex items-center justify-center">
-            <span className="text-white text-xl">현재 선택된 영상</span>
-          </div>
+        <a href={center} target="_blank" rel="noopener noreferrer">
+          <video
+            src={center}
+            preload="metadata"
+            muted
+            className="w-[520px] aspect-video rounded-2xl shadow-2xl"
+          />
+        </a>
 
-          {/* 오른쪽 영상 */}
-          <div className="w-72 h-40 bg-gray-700 rounded-2xl opacity-50 scale-90" />
-        </div>
+        <button onClick={() => setCurrentIndex(rightIndex)}>
+          <video
+            src={right}
+            preload="metadata"
+            muted
+            className="w-64 aspect-video opacity-50 scale-90 rounded-xl"
+          />
+        </button>
 
-        {/* ▶ 화살표 */}
-        <button className="text-white text-5xl hover:scale-110 transition">
+        <button
+          onClick={() => setCurrentIndex(rightIndex)}
+          className="text-white text-4xl"
+        >
           ▶
         </button>
       </div>
