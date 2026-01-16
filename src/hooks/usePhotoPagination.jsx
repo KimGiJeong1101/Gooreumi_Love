@@ -2,10 +2,11 @@ import { useMemo } from "react";
 
 const usePhotoPagination = (photosPerPage = 9) => {
   const images = import.meta.glob(
-    "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}"
+    "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}",
+    { eager: true, as: "url" } // ⭐ 여기가 핵심
   );
 
-  const imageEntries = useMemo(() => Object.entries(images), [images]);
+  const imageEntries = Object.values(images); // Object.keys → Object.values
 
   const totalPhotos = imageEntries.length;
   const totalPages = Math.ceil(totalPhotos / photosPerPage);
