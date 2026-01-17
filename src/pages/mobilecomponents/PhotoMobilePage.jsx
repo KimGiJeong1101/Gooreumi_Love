@@ -24,7 +24,7 @@ const PhotoMobilePage = () => {
           const groupStart = groupIdx * PAGES_PER_GROUP + 1;
           const groupEnd = Math.min(
             groupStart + PAGES_PER_GROUP - 1,
-            totalPages
+            totalPages,
           );
 
           const isGroupOpen = openGroup === groupIdx;
@@ -98,7 +98,7 @@ const PhotoMobilePage = () => {
                         >
                           <div className="py-3">
                             <div className="grid grid-cols-3 gap-2">
-                              {pageImages.map(([path], idx) => (
+                              {pageImages.map((path, idx) => (
                                 <img
                                   key={idx}
                                   src={path}

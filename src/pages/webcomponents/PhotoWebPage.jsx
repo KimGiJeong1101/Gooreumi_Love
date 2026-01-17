@@ -54,14 +54,14 @@ const PhotoWebPage = () => {
 
           {/* 썸네일 그리드 */}
           <div className="grid grid-cols-3 gap-3">
-            {pageImages.map(([path], idx) => (
+            {pageImages.map((path, idx) => (
               <img
                 key={idx}
                 src={path}
                 loading="lazy"
                 onClick={() => setSelectedImage(path)}
                 className={`aspect-square object-cover rounded cursor-pointer
-                  ${selectedImage === path ? "ring-2 ring-blue-500" : ""}`}
+      ${selectedImage === path ? "ring-2 ring-blue-500" : ""}`}
                 alt=""
               />
             ))}
