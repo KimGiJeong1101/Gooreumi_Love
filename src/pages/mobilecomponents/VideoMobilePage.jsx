@@ -10,11 +10,11 @@ const VideoMobilePage = () => {
     { eager: true, query: "?url", import: "default" },
   );
 
-  // video 경로 → 썸네일 경로 매칭
+  // ⭐ 썸네일 맵 생성 (파일명 기준)
   const thumbMap = useMemo(() => {
     const map = {};
-    Object.values(thumbs).forEach((url) => {
-      const name = url.split("/").pop().split(".")[0];
+    Object.entries(thumbs).forEach(([path, url]) => {
+      const name = path.split("/").pop().split(".")[0];
       map[name] = url;
     });
     return map;
@@ -61,15 +61,17 @@ const VideoMobilePage = () => {
     <div className="w-full min-h-screen bg-gray-100">
       <div className="flex flex-col">
         {videoEntries.slice(0, loadedCount).map((video, idx) => {
-          const fileName = video.split("/").pop().split(".")[0];
-          const poster = thumbMap[fileName];
+          const poster = thumbMap[video.name]; // ⭐ 핵심
 
           return (
             <div key={idx}>
-              <button onClick={() => setActiveVideo(video)} className="w-full">
+              <button
+                onClick={() => setActiveVideo(video.url)}
+                className="w-full"
+              >
                 <video
-                  src={video}
-                  poster={poster} // ⭐ 핵심
+                  src={video.url}
+                  poster={poster}
                   muted
                   playsInline
                   preload="metadata"

@@ -7,7 +7,16 @@ const useVideoPagination = () => {
     import: "default",
   });
 
-  const videoEntries = Object.values(videos); // Object.keys → Object.values
+  // ⭐ 핵심: path 기준으로 name 추출
+  const videoEntries = useMemo(() => {
+    return Object.entries(videos).map(([path, url]) => {
+      const name = path.split("/").pop().split(".")[0];
+      return {
+        name, // video1
+        url, // /assets/video1.abcd1234.mp4
+      };
+    });
+  }, [videos]);
 
   return {
     videoEntries,
