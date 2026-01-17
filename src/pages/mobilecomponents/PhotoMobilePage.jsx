@@ -103,6 +103,8 @@ const PhotoMobilePage = () => {
                                   key={idx}
                                   src={path}
                                   alt=""
+                                  loading="lazy"
+                                  decoding="async"
                                   onClick={() => setSelectedImage(path)}
                                   className="aspect-square object-cover rounded cursor-pointer"
                                 />
@@ -129,6 +131,8 @@ const PhotoMobilePage = () => {
           <img
             src={selectedImage}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain"
           />
         </div>

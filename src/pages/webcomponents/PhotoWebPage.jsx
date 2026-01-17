@@ -20,6 +20,8 @@ const PhotoWebPage = () => {
             <img
               src={selectedImage}
               alt=""
+              loading="lazy"
+              decoding="async"
               className="max-w-full max-h-full object-contain"
             />
           ) : (
@@ -59,6 +61,7 @@ const PhotoWebPage = () => {
                 key={idx}
                 src={path}
                 loading="lazy"
+                decoding="async"
                 onClick={() => setSelectedImage(path)}
                 className={`aspect-square object-cover rounded cursor-pointer
       ${selectedImage === path ? "ring-2 ring-blue-500" : ""}`}
