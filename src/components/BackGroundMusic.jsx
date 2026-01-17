@@ -168,7 +168,11 @@ const BackGroundMusic = () => {
       )}
 
       {/* ▶ 오디오 */}
-      <audio ref={audioRef} src="/Gooreumi_Love.mp3" loop />
+      <audio
+        ref={audioRef}
+        src={`${import.meta.env.BASE_URL}Gooreumi_Love.mp3`}
+        loop
+      />
     </>
   );
 };
