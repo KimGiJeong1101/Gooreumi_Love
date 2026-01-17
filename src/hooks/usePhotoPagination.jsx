@@ -3,7 +3,7 @@ import { useMemo } from "react";
 const usePhotoPagination = (photosPerPage = 9) => {
   const images = import.meta.glob(
     "/src/assets/images/*.{jpg,JPG,jpeg,JPEG,png,PNG}",
-    { eager: true, query: "?url", import: "default" }, 
+    { eager: true, query: "?url", import: "default" },
   );
 
   const imageEntries = Object.values(images); // Object.keys → Object.values
