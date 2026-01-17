@@ -9,6 +9,8 @@ const BackGroundMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.1);
 
+  const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+
   // 🔹 시작 버튼 클릭 (사용자 제스처)
   const handleStart = () => {
     // 음악 시작
@@ -154,16 +156,17 @@ const BackGroundMusic = () => {
             </button>
           </div>
 
-          {/* 볼륨 */}
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolumeChange}
-            className="w-12 sm:w-16 h-0.5 bg-white/40 rounded-full appearance-none cursor-pointer"
-          />
+          {!isMobile && (
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              className="w-12 sm:w-16 h-0.5 bg-white/40 rounded-full appearance-none cursor-pointer"
+            />
+          )}
         </div>
       )}
 
