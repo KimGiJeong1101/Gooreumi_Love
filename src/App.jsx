@@ -7,12 +7,15 @@ import BackGroundMusic from "./components/BackGroundMusic";
 const App = () => {
   const [page, setPage] = useState("home"); // home | photo | video
 
+  const [speed, setSpeed] = useState(5000); // ⭐ 속도 상태 추가
+
   return (
     <div className="w-full min-h-screen border-4 relative">
       <BackGroundMusic></BackGroundMusic>
       <div className="mx-auto px-6 pb-6">
         <Header setPage={setPage} />
-        <Contents page={page} />
+
+        <Contents page={page} speed={speed} setSpeed={setSpeed} />
       </div>
     </div>
   );

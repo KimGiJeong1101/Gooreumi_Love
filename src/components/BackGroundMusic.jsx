@@ -108,64 +108,66 @@ const BackGroundMusic = () => {
       {/* ▶ 음악 컨트롤 (오른쪽 상단) */}
       {started && (
         <div
-          style={{
-            position: "absolute",
-            top: "16px",
-            right: "16px",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            padding: "10px 14px",
-            background: "rgba(0, 0, 0, 0.6)",
-            borderRadius: "8px",
-            zIndex: 1000,
-          }}
+          className="
+      
+      absolute top-4 right-4 z-[1000]
+      flex items-center gap-3
+      
+      
+      padding-[8px_12px] md:p-3
+      bg-white/70 backdrop-blur-md
+      border border-white/50 shadow-sm
+      rounded-2xl md:rounded-full
+      
+      
+      max-w-[140px] md:max-w-none
+    "
         >
-          {/* 버튼 영역 */}
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}
-          >
-            {!isPlaying && (
+          {/* 버튼 그룹 */}
+          <div className="flex items-center gap-2 md:gap-4">
+            {!isPlaying ? (
               <button
                 onClick={handlePlay}
-                className="w-5 h-6 flex items-center justify-center text-white text-base"
+                className="w-8 h-8 flex items-center justify-center text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
               >
-                ▶
+                <span className="text-sm">▶</span>
               </button>
-            )}
-
-            {isPlaying && (
+            ) : (
               <button
                 onClick={handlePause}
-                className="w-5 h-6 flex items-center justify-center text-white text-base"
+                className="w-8 h-8 flex items-center justify-center text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
               >
-                ❚❚
+                <span className="text-xs">❚❚</span>
               </button>
             )}
 
             <button
               onClick={handleStop}
-              className="w-5 h-6 flex items-center justify-center text-white text-base"
+              className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-400 hover:bg-red-50 rounded-full transition-colors text-xs"
             >
               ■
             </button>
           </div>
 
+          {/* 볼륨 조절: 모바일에서는 숨기고 태블릿/데스크탑 이상에서만 노출 */}
           {!isMobile && (
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-              className="w-12 sm:w-16 h-0.5 bg-white/40 rounded-full appearance-none cursor-pointer"
-            />
+            <div className="hidden sm:flex items-center gap-2 border-l border-gray-200 pl-3 ml-1">
+              <span className="text-[10px] text-gray-400">Vol</span>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+                className="
+            w-16 md:w-20 h-1 
+            bg-blue-100 rounded-full 
+            appearance-none cursor-pointer
+            accent-blue-400
+          "
+              />
+            </div>
           )}
         </div>
       )}
