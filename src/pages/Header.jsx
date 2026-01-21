@@ -67,7 +67,7 @@ const Header = ({ setPage }) => {
             w-28 h-12 
             text-gray-600 font-medium
             border-b-2 border-transparent 
-            hover:border-yellow-400 hover:text-yellow-600
+            hover:border-gray-300 hover:text-gray-500
             transition-all duration-300
           "
         >
@@ -80,7 +80,7 @@ const Header = ({ setPage }) => {
             w-28 h-12 
             text-gray-600 font-medium
             border-b-2 border-transparent 
-            hover:border-yellow-400 hover:text-yellow-600
+            hover:border-gray-300 hover:text-gray-500
             transition-all duration-300
           "
         >
