@@ -5,7 +5,7 @@ const VideoMobilePage = () => {
   const { videoEntries, totalVideos } = useVideoPagination();
 
   const thumbs = import.meta.glob(
-    "/src/assets/video-thumbs/*.{jpg,png,JPG,PNG}",
+    "/src/assets/video-thumbs/*.{jpg,png,JPG,PNG,webp,WEBP}",
     { eager: true, query: "?url", import: "default" },
   );
 
