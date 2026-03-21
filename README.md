@@ -83,14 +83,34 @@ public/
 
 ## 실행 방법
 
+### 사전 준비
+
+> Node.js가 설치되어 있어야 합니다.
+> [Node.js 공식 사이트](https://nodejs.org)에서 **LTS 버전**을 다운로드해 설치하세요.
+> 설치 후 터미널(명령 프롬프트)에서 `node -v` 를 입력하면 버전이 출력되면 완료입니다.
+
+### 설치 및 실행
+
 ```bash
-# 패키지 설치
+# 1. 저장소 클론 (코드 내려받기)
+git clone https://github.com/KimGiJeong1101/Gooreumi_Love.git
+
+# 2. 프로젝트 폴더로 이동
+cd Gooreumi_Love
+
+# 3. 패키지 설치 (처음 한 번만)
 npm install
 
-# 개발 서버 실행
+# 4. 개발 서버 실행
 npm run dev
+```
 
-# 프로덕션 빌드
+브라우저에서 `http://localhost:5173` 으로 접속하면 사이트를 확인할 수 있습니다.
+
+### 추가 명령어
+
+```bash
+# 프로덕션 빌드 (배포용 파일 생성)
 npm run build
 
 # 빌드 결과 미리보기
